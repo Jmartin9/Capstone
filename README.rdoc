@@ -23,7 +23,7 @@ Things you may want to cover:
 
 * ...
 
-Test addition for deploying to heroku
+Test addition for deploying to heroku in github!
 
 ![Codeship Status](https://www.codeship.io/projects/a7730ba0-a658-0131-bfdd-324d295efe74/status?branch=master)
 

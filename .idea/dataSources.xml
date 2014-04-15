@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Rails poiproject: development" uuid="f73f47e1-810e-49f8-a292-008aaae7b65c">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Joseph\Desktop\Capstone\db\development.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Joseph\Desktop\Capstone - Copy\db\development.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>
