@@ -62,14 +62,14 @@ h1 {text-align: center}
 .admin_users
 {
     width:600px;
-    float:left;"
+    float:left;
 }
 
 .admin_pois
 {
     margin-left: 15px;
     width:485px;
-    float:left;"
+    float:left;
 }
 
 .admin_users_notifications
@@ -99,7 +99,7 @@ h1 {text-align: center}
 .not_found
 {
     float: left;
-    width = 500px;
+    width: 500px;
     margin-left: auto;
     text-align: center;
 }
