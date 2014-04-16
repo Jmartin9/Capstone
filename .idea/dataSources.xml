@@ -4,25 +4,25 @@
     <data-source source="LOCAL" name="Rails poiproject: development" uuid="f73f47e1-810e-49f8-a292-008aaae7b65c">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:my_db_dev</jdbc-url>
-      <user-name>user</user-name>
-      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/my_db_dev</jdbc-url>
+      <user-name>joseph</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails poiproject: test" uuid="f96b0d48-7536-4759-8001-4b759fc38631">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:my_db_test</jdbc-url>
-      <user-name>user</user-name>
-      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/my_db_test</jdbc-url>
+      <user-name>joseph</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails poiproject: production" uuid="77ef259f-63b5-4415-9a9c-98e829fb936a">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql:my_db_production</jdbc-url>
-      <user-name>user</user-name>
-      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+      <user-name>joseph</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <libraries />
     </data-source>
   </component>
