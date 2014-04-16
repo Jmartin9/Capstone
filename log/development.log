@@ -1,0 +1,290 @@
+  [1m[36m (26.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePois (20140220050801)
+  [1m[35m (6.4ms)[0m  BEGIN
+  [1m[36m (19.0ms)[0m  [1mCREATE TABLE "pois" ("id" serial primary key, "name" character varying(255), "description" text, "picture" character varying(255), "address" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (5.9ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140220050801"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateComments (20140220052808)
+  [1m[35m (6.1ms)[0m  BEGIN
+  [1m[36m (17.9ms)[0m  [1mCREATE TABLE "comments" ("id" serial primary key, "user_name" character varying(255), "body" text, "poi_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140220052808"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to DeviseCreateUsers (20140220064405)
+  [1m[35m (5.9ms)[0m  BEGIN
+  [1m[36m (17.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying(255), "last_sign_in_ip" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140220064405"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddRoleToUsers (20140225004951)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (6.9ms)[0m  [1mALTER TABLE "users" ADD COLUMN "role" character varying(255)[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140225004951"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddColumnsToUsers (20140225045456)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD COLUMN "provider" character varying(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD COLUMN "uid" character varying(255)
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140225045456"]]
+  [1m[35m (6.0ms)[0m  COMMIT
+Migrating to AddLatLongToPoi (20140227045215)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pois" ADD COLUMN "lat" decmial
+PG::UndefinedObject: ERROR:  type "decmial" does not exist
+LINE 1: ALTER TABLE "pois" ADD COLUMN "lat" decmial
+                                            ^
+: ALTER TABLE "pois" ADD COLUMN "lat" decmial
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddLatLongToPoi (20140227045215)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (5.1ms)[0m  [1mALTER TABLE "pois" ADD COLUMN "lat" decimal[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "pois" ADD COLUMN "long" decimal
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140227045215"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreatePictures (20140306031309)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (19.0ms)[0m  CREATE TABLE "pictures" ("id" serial primary key, "poi_id" integer, "image" character varying(255), "title" character varying(255), "approved" boolean, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (1.3ms)[0m  [1mCREATE INDEX "index_pictures_on_poi_id" ON "pictures" ("poi_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140306031309"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to DeviseCreateAdminUsers (20140309223714)
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36m (16.1ms)[0m  [1mCREATE TABLE "admin_users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying(255), "last_sign_in_ip" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35mAdminUser Exists (6.2ms)[0m  SELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = 'admin@example.com' LIMIT 1
+  [1m[36mSQL (28.8ms)[0m  [1mINSERT INTO "admin_users" ("created_at", "email", "encrypted_password", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", Wed, 16 Apr 2014 22:50:24 UTC +00:00], ["email", "admin@example.com"], ["encrypted_password", "$2a$10$wkHlhN7JVdiKvuRk.tRet.llZC/E7IxWGe7rzazZeXxdbjXOcQxeC"], ["updated_at", Wed, 16 Apr 2014 22:50:24 UTC +00:00]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140309223714"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateActiveAdminComments (20140309223719)
+  [1m[35m (12.0ms)[0m  BEGIN
+  [1m[36m (11.3ms)[0m  [1mCREATE TABLE "active_admin_comments" ("id" serial primary key, "namespace" character varying(255), "body" text, "resource_id" character varying(255) NOT NULL, "resource_type" character varying(255) NOT NULL, "author_id" integer, "author_type" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")
+  [1m[36m (1.2ms)[0m  [1mCREATE INDEX "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (1.3ms)[0m  CREATE INDEX "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments" ("resource_type", "resource_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140309223719"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to ActsAsVotableMigration (20140310233759)
+  [1m[36m (6.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (16.9ms)[0m  CREATE TABLE "votes" ("id" serial primary key, "votable_id" integer, "votable_type" character varying(255), "voter_id" integer, "voter_type" character varying(255), "vote_flag" boolean, "vote_scope" character varying(255), "vote_weight" integer, "created_at" timestamp, "updated_at" timestamp) 
+  [1m[36m (3.1ms)[0m  [1mCREATE INDEX "index_votes_on_voter_id_and_voter_type_and_vote_scope" ON "votes" ("voter_id", "voter_type", "vote_scope")[0m
+  [1m[35m (1.3ms)[0m  CREATE INDEX "index_votes_on_votable_id_and_votable_type_and_vote_scope" ON "votes" ("votable_id", "votable_type", "vote_scope")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140310233759"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-04-16 19:06:47 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (3.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/pois" for 127.0.0.1 at 2014-04-16 19:06:48 -0400
+Processing by PoisController#index as HTML
+  [1m[35mPoi Load (8.7ms)[0m  SELECT "pois".* FROM "pois"
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "pois".* FROM "pois"[0m
+  Rendered pois/index.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 5922ms (Views: 5874.6ms | ActiveRecord: 12.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.fancybox.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/fancybox.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pages.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pictures.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pois.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/comments.css?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.browser.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.fancybox.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/fancybox.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/underscore.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/base.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/base/base.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/objects/base_builder.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/objects/builder.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/objects/handler.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/objects/null_clusterer.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/bound.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/common.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/circle.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/clusterer.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/kml.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/map.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/marker.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/polygon.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/builders/polyline.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/bound.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/circle.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/clusterer.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/kml.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/map.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/marker.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/polygon.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/objects/polyline.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google/primitives.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/gmaps/google.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.core.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.datepicker.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.button.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.mouse.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.draggable.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.position.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.resizable.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.dialog.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/jquery.ui.sortable.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/base.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/batch_actions.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/has_many.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/popover.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/ext/jquery.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin/application.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/active_admin.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/comments.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pages.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pictures.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/pois.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-04-16 19:06:54 -0400
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2014-04-16 19:06:56 -0400
