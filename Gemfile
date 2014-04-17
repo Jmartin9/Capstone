@@ -77,6 +77,10 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'rake', '~> 10.3.0'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
